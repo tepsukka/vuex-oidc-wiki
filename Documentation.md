@@ -5,7 +5,9 @@ To install the package run:
 
 ```bash
 npm install vuex-oidc --save
+
 ```
+
 
 ## 1) Create your oidc settings
 
@@ -21,6 +23,7 @@ export const oidcSettings = {
 ```
 
 Check out documentation for oidc-client to see all options: https://github.com/IdentityModel/oidc-client-js/wiki
+
 
 ## 2) Setup vuex
 
@@ -38,6 +41,7 @@ export default new Vuex.Store({
 })
 
 ```
+
 
 ## 3) Setup route for Open id callback
 
@@ -74,6 +78,7 @@ export default {
   }
 }
 </script>
+
 ```
 
 Setup the route with your callback component. Note the meta properties isVuexOidcCallback and isPublic which are required
@@ -97,6 +102,7 @@ const routes = [
 
 ```
 
+
 ## 4) Setup vue-router
 
 Create the oidc router middleware with factory funtion vuexOidcCreateRouterMiddleware that takes your vuex store as argument.
@@ -114,6 +120,7 @@ const router = new Router({
 router.beforeEach(vuexOidcCreateRouterMiddleware(store))
 
 ```
+
 
 ## 5) Control rendering in routes that require authentication
 
@@ -142,6 +149,7 @@ export default {
 
 ```
 
+
 If you want to determin access on an app/layout level you can check if a user has access by checking oidcIsAuthenticated
 and isPublic of current route.
 
@@ -167,6 +175,7 @@ export default {
   }
 }
 </script>
+
 ```
 
 
@@ -202,6 +211,7 @@ export default {
 
 ```
 
+
 ## 7) Optional: set specific routes as public
 
 ```js
@@ -236,7 +246,6 @@ export const oidcSettings = {
 ```
 
 You have to make sure that you have an endpoint that matches the silent_redirect_uri setting. It should run the following code:
-
 
 ```js
 import { vuexOidcProcessSilentSignInCallback } from 'vuex-oidc'
