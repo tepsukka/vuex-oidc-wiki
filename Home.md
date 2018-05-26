@@ -255,3 +255,34 @@ import { oidcSettings } from '@/config'
 vuexOidcProcessSilentSignInCallback(oidcSettings)
 
 ```
+
+
+# API
+
+The router middleware handles authentication of routes automatically, but there are also actions you can use directly. If you want you can skip the router middleware to customize the authentication and access control behaviour of your app.
+
+```js
+import { mapGetters, mapActions } from 'vuex'
+
+export default {
+  name: 'App',
+  computed: {
+    ...mapGetters([
+      'oidcIsAuthenticated'
+    ]),
+    hasAccess: function() {
+      return this.oidcIsAuthenticated || this.$route.meta.isPublic
+    }
+  },
+  methods: {
+    ...mapActions([
+      'authenticateOidc', // Authenticates with redirect to sign in if not signed in
+      'oidcSignInCallback', // Handles callback from authentication redirect
+      'authenticateOidcSilent', // Authenticates if signed in. No redirect is made if not signed in
+      'getOidcUser', // Update user in store
+      'signOutOidc', // Signs out user
+    ])
+  }
+}
+</script>
+```
