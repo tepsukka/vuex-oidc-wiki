@@ -122,9 +122,11 @@ router.beforeEach(vuexOidcCreateRouterMiddleware(store))
 ```
 
 
-## 5) Control rendering in routes that require authentication
+## 5) Control rendering in app layout or common components
 
-The vuex getter oidcIsAuthenticated can be used to check login. This can be done in any way you want. Here is an example
+The router middleware will ensure that routes that require authentication are not rendered. If you want to control rendering outside of the router-view you can use the vuex getter oidcIsAuthenticated to check authentication. 
+
+This can be done in any way you want. Here is an example
 of how to condition rendering against authentication in a component.
 
 ```js
@@ -138,7 +140,7 @@ of how to condition rendering against authentication in a component.
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'MyProtectedRouteComponent',
+  name: 'MyCommonComponent',
   computed: {
     ...mapGetters([
       'oidcIsAuthenticated'
@@ -150,14 +152,14 @@ export default {
 ```
 
 
-If you want to determin access on an app/layout level you can check if a user has access by checking oidcIsAuthenticated
-and isPublic of current route.
+If you want to know not only if the user is authenticated, but if they have access to the current route you can do so by checking oidcIsAuthenticated together with meta.isPublic of current route.
 
 ```js
 <template>
   <div v-if="hasAccess">
-    Protected content
+    You have access to this route
   </div>
+  <router-view></router-view>
 </template>
 
 <script>
