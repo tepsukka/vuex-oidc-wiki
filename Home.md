@@ -122,7 +122,7 @@ router.beforeEach(vuexOidcCreateRouterMiddleware(store))
 ```
 
 
-## 5) Control rendering in app layout or common components
+## 5) Optional: Control rendering in app layout or common components
 
 The router middleware will ensure that routes that require authentication are not rendered. If you want to control rendering outside of the router-view you can use the vuex getter oidcIsAuthenticated to check authentication. 
 
