@@ -181,7 +181,39 @@ export default {
 ```
 
 
-## 6) Optional: display signed in user info and show sign out button
+## 6) Optional: use access token in AJAX requests
+
+Get the access_token from the store and set it as Bearer authentication header if you want to make authenticated AJAX requests. There is also a vuex getter that can be used to obtain the access_token (See API bellow).
+
+```js
+import store from '@/store'
+
+makeRequest('get', 'https://api.example.com/path', store.state.oidcStore.access_token)
+  .then((reponse) => {
+    console.log(response)
+  })
+
+function makeRequest(method, url, access_token) {
+  return new Promise(function (resolve, reject) {
+    let xhr = new XMLHttpRequest()
+    xhr.open(method, url)
+    xhr.withCredentials = true
+    xhr.setRequestHeader('Authorization', 'Bearer ' + access_token)
+    xhr.onload = function () {
+      if (this.status >= 200 && this.status < 300) {
+        resolve(xhr.response)
+      }
+    }
+    xhr.onerror = function () {
+      ...
+    }
+    xhr.send()
+  })
+}
+```
+
+
+## 7) Optional: display signed in user info and show sign out button
 
 Use vuex getter oidcUser to show user info. Use vuex action signOutOidc to sign out user.
 
@@ -214,7 +246,7 @@ export default {
 ```
 
 
-## 7) Optional: set specific routes as public
+## 8) Optional: set specific routes as public
 
 ```js
 import { PublicRouteComponent } from '@/components/PublicRouteComponent'
@@ -236,7 +268,7 @@ const routes = [
 Routes with meta.isPublic will not require authentication. If you have setup a silent_redirect_uri a silent signIn will be made on public routes.
 
 
-## 8) Optional: setup silent renew callback
+## 9) Optional: setup silent renew callback
 
 ```js
 export const oidcSettings = {
@@ -270,7 +302,10 @@ export default {
   name: 'App',
   computed: {
     ...mapGetters([
-      'oidcIsAuthenticated'
+      'oidcIsAuthenticated',
+      'oidcUser',
+      'oidcAccessToken',
+      'oidcIdToken'
     ]),
     hasAccess: function() {
       return this.oidcIsAuthenticated || this.$route.meta.isPublic
