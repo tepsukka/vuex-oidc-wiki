@@ -93,7 +93,7 @@ const routes = [
     path: '/oidc-callback', // Needs to match redirect_uri in you oidcSettings
     name: 'oidcCallback',
     component: OidcCallback,
-    meta {
+    meta: {
       isVuexOidcCallback: true,
       isPublic: true
     }
