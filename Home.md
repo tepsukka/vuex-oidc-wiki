@@ -36,7 +36,7 @@ import { oidcSettings } from '@/config'
 
 export default new Vuex.Store({
   modules: {
-    vuexOidcCreateStoreModule(oidcSettings)
+    oidcStore: vuexOidcCreateStoreModule(oidcSettings)
   }
 })
 
