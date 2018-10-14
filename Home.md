@@ -81,8 +81,7 @@ export default {
 
 ```
 
-Setup the route with your callback component. Note the meta properties isVuexOidcCallback and isPublic which are required
-for this route.
+Setup the route with your callback component. Note the meta properties isOidcCallback and isPublic which are required for this route.
 
 ```js
 import OidcCallback from '@/components/OidcCallback'
@@ -94,7 +93,7 @@ const routes = [
     name: 'oidcCallback',
     component: OidcCallback,
     meta: {
-      isVuexOidcCallback: true,
+      isOidcCallback: true,
       isPublic: true
     }
   }
