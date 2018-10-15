@@ -41,7 +41,16 @@ export default new Vuex.Store({
 })
 
 ```
+If you want a namespaced module you can pass moduleOptions as a second argument:
 
+```js
+export default new Vuex.Store({
+  modules: {
+    oidcStore: vuexOidcCreateStoreModule(oidcSettings, { namespaced: true })
+  }
+})
+
+```
 
 ## 3) Setup route for Open id callback
 
