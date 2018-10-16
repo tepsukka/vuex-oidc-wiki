@@ -7,6 +7,7 @@ To install the package run:
 npm install vuex-oidc --save
 
 ```
+For reference, there is an example of a working implementation in https://github.com/perarnborg/vuex-oidc-example
 
 
 ## 1) Create your oidc settings
