@@ -55,8 +55,9 @@ export default new Vuex.Store({
 
 ## 3) Setup route for Open id callback
 
-Create a callback component. The component will be rendered during the time that the callback is made, so feel free to add
-any loader/spinner if you want.
+Create a callback component. The component will be rendered during the time that the callback is made, so feel free to add any loader/spinner if you want.
+
+If you have created your vuex store module as a namespaced module you will have to map the action from the correct namespace.
 
 ```js
 <template>
@@ -109,8 +110,7 @@ const routes = [
   }
 ]
 
-```
-
+``` 
 
 ## 4) Setup vue-router
 
@@ -130,6 +130,11 @@ router.beforeEach(vuexOidcCreateRouterMiddleware(store))
 
 ```
 
+vuexOidcCreateRouterMiddleware takes an optional second argument called vuexNamespace. I you have created you oidc vuex module as a namespaced module you should pass the namespace string as this second argument:
+
+```
+router.beforeEach(vuexOidcCreateRouterMiddleware(store, 'oidcStore'))
+```
 
 ## 5) Optional: Control rendering in app layout or common components
 
