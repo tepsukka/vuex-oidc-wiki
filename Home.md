@@ -13,6 +13,8 @@ For reference, there is an example of a working implementation in https://github
 ## 1) Create your oidc settings
 
 ```js
+// https://github.com/perarnborg/vuex-oidc-example/blob/master/src/config/oidc.js
+
 export const oidcSettings = {
   authority: 'https://your_oidc_authority',
   client_id: 'your_client_id',
@@ -31,9 +33,11 @@ Check out documentation for oidc-client to see all options: https://github.com/I
 Import and use vuex module. Is is created with a factory function that takes your oidc config as argument.
 
 ```js
+// https://github.com/perarnborg/vuex-oidc-example/blob/master/src/store.js
+
 import { vuexOidcCreateStoreModule } from 'vuex-oidc'
 
-import { oidcSettings } from '@/config'
+import { oidcSettings } from './config/oidc'
 
 export default new Vuex.Store({
   modules: {
@@ -60,6 +64,10 @@ Create a callback component. The component will be rendered during the time that
 If you have created your vuex store module as a namespaced module you will have to map the action from the correct namespace.
 
 ```js
+// https://github.com/perarnborg/vuex-oidc-example/blob/master/src/views/OidcCallback.vue
+
+<script>
+
 <template>
   <div>
   </div>
@@ -68,8 +76,6 @@ If you have created your vuex store module as a namespaced module you will have 
 <script>
 import { mapActions } from 'vuex'
 
-import { router } from '@/routes/router'
-
 export default {
   name: 'OidcCallback',
   methods: {
@@ -77,14 +83,14 @@ export default {
       'oidcSignInCallback'
     ])
   },
-  mounted() {
+  mounted () {
     this.oidcSignInCallback()
       .then((redirectPath) => {
-        router.push(redirectPath)
+        this.$router.push(redirectPath)
       })
       .catch((err) => {
         console.error(err)
-        router.push('/oidc-callback-error') // Handle errors any way you want
+        this.$router.push('/oidc-callback-error') // Handle errors any way you want
       })
   }
 }
@@ -95,6 +101,8 @@ export default {
 Setup the route with your callback component. Note the meta properties isOidcCallback and isPublic which are required for this route.
 
 ```js
+// https://github.com/perarnborg/vuex-oidc-example/blob/master/src/router.js
+
 import OidcCallback from '@/components/OidcCallback'
 
 const routes = [
@@ -117,6 +125,8 @@ const routes = [
 Create the oidc router middleware with factory funtion vuexOidcCreateRouterMiddleware that takes your vuex store as argument.
 
 ```js
+// https://github.com/perarnborg/vuex-oidc-example/blob/master/src/router.js
+
 import Router from 'vue-router'
 import { vuexOidcCreateRouterMiddleware } from 'vuex-oidc'
 
@@ -140,8 +150,7 @@ router.beforeEach(vuexOidcCreateRouterMiddleware(store, 'oidcStore'))
 
 The router middleware will ensure that routes that require authentication are not rendered. If you want to control rendering outside of the router-view you can use the vuex getter oidcIsAuthenticated to check authentication. 
 
-This can be done in any way you want. Here is an example
-of how to condition rendering against authentication in a component.
+This can be done in any way you want. Here is an example of how to condition rendering against authentication in a component.
 
 ```js
 <template>
