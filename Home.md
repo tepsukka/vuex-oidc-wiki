@@ -17,7 +17,7 @@ export const oidcSettings = {
   authority: 'https://your_oidc_authority',
   client_id: 'your_client_id',
   redirect_uri: 'http://localhost:1337/oidc-callback',
-  response_type: 'openid profile email api1',
+  response_type: 'id_token token',
   scope: 'openid profile'
 }
 
