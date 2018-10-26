@@ -328,7 +328,9 @@ export default {
       'oidcIsAuthenticated',
       'oidcUser',
       'oidcAccessToken',
+      'oidcAccessTokenExp',
       'oidcIdToken',
+      'oidcIdTokenExp',
       'oidcAuthenticationIsChecked'
     ]),
     hasAccess: function() {
