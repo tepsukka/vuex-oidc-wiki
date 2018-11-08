@@ -348,6 +348,28 @@ export default new Vuex.Store({
 
 ```
 
+If you want to listen to the events from inside your application there the events are also dispatched in the browser as custom events by vuex-oidc (prefixed with vuexoidc:):
+
+```
+// https://github.com/perarnborg/vuex-oidc-example/tree/master/src
+
+export default {
+  name: 'App',
+  methods: {
+    userLoaded: function () {
+      console.log('I am listening to the user loaded event in vuex-oidc')
+    }
+  },
+  mounted () {
+    window.addEventListener('vuexoidc:userLoaded', this.userLoaded)
+  },
+  destroyed () {
+    window.removeEventListener('vuexoidc:userLoaded', this.userLoaded)
+  }
+}
+
+```
+
 # API
 
 The router middleware handles authentication of routes automatically, but there are also actions you can use directly. If you want you can skip the router middleware to customize the authentication and access control behaviour of your app.
