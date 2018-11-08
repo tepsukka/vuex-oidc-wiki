@@ -348,7 +348,7 @@ export default new Vuex.Store({
 
 ```
 
-If you want to listen to the events from inside your application there the events are also dispatched in the browser as custom events by vuex-oidc (prefixed with vuexoidc:):
+If you want to listen to the events from inside your application the events are also dispatched in the browser as custom events by vuex-oidc (prefixed with vuexoidc:):
 
 ```
 // https://github.com/perarnborg/vuex-oidc-example/tree/master/src
