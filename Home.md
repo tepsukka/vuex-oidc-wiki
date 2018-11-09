@@ -331,7 +331,7 @@ export default new Vuex.Store({
   modules: {
     oidcStore: vuexOidcCreateStoreModule(
       oidcSettings,
-      // Optionlaly define the store module as namespaced
+      // Optionaly define the store module as namespaced
       { namespaced: true },
       // Optional OIDC event listeners
       {
@@ -359,7 +359,7 @@ export default new Vuex.Store({
     oidcStore: vuexOidcCreateStoreModule(
       oidcSettings,     
       { 
-        namespaced: true, // Optionlaly define the store module as namespaced
+        namespaced: true, // Optionaly define the store module as namespaced
         dispatchEventsOnWindow: true // Optionaly dispatch events from oidc-client on window
       }
     )
