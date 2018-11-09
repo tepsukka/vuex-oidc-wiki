@@ -46,7 +46,7 @@ export default new Vuex.Store({
 })
 
 ```
-If you want a namespaced module you can pass moduleOptions as a second argument:
+If you want a namespaced module you can pass storeSetting as a second argument:
 
 ```js
 export default new Vuex.Store({
@@ -348,10 +348,27 @@ export default new Vuex.Store({
 
 ```
 
-If you want to listen to the events from inside your application the events are also dispatched in the browser as custom events by vuex-oidc (prefixed with vuexoidc:):
+If you want to listen to the events from inside your application the events can also be dispatched in the browser as custom events by vuex-oidc (prefixed with `vuexoidc:`). If you want this you pass `dispatchEventsOnWindow: true` as a storeSetting (second argument to the vuexOidcCreateStoreModule function).
 
 ```
-// https://github.com/perarnborg/vuex-oidc-example/tree/master/src
+// https://github.com/perarnborg/vuex-oidc-example/tree/master/src/store.js
+// How to make vuex-oidc dispatch events on window
+
+export default new Vuex.Store({
+  modules: {
+    oidcStore: vuexOidcCreateStoreModule(
+      oidcSettings,     
+      { 
+        namespaced: true, // Optionlaly define the store module as namespaced
+        dispatchEventsOnWindow: true // Optionaly dispatch events from oidc-client on window
+      }
+    )
+  }
+})
+
+
+// https://github.com/perarnborg/vuex-oidc-example/tree/master/src/App.vue
+// How to listen to oidc-client events on window
 
 export default {
   name: 'App',
