@@ -17,9 +17,9 @@ For reference, there is an example of a working implementation in https://github
 
 export const oidcSettings = {
   authority: 'https://your_oidc_authority',
-  client_id: 'your_client_id',
-  redirect_uri: 'http://localhost:1337/oidc-callback',
-  response_type: 'id_token token',
+  clientId: 'your_client_id',
+  redirectUri: 'http://localhost:1337/oidc-callback',
+  responseType: 'id_token token',
   scope: 'openid profile'
 }
 
@@ -27,6 +27,7 @@ export const oidcSettings = {
 
 Check out documentation for oidc-client to see all options: https://github.com/IdentityModel/oidc-client-js/wiki
 
+A note on the settings: oidc-client uses snake_case for some options and camelCase for others. With vuex-oidc you can use camelCase for all of the options. Or if you want you can use snake_case for the ones that are snake_cased in oidc-client.
 
 ## 2) Setup vuex
 
@@ -296,7 +297,7 @@ Routes with meta.isPublic will not require authentication. If you have setup a s
 ```js
 export const oidcSettings = {
   ...youOidcOtherSettings,
-  silent_redirect_uri: 'http://localhost:1337/oidc-silent-renew.html',
+  silentRedirectUri: 'http://localhost:1337/oidc-silent-renew.html',
   automaticSilentRenew: true // If true oidc-client will try to renew your token when it is about to expire
 }
 
