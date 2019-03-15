@@ -27,7 +27,7 @@ export const oidcSettings = {
 
 Check out documentation for oidc-client to see all options: https://github.com/IdentityModel/oidc-client-js/wiki
 
-A note on the settings: oidc-client uses snake_case for some options and camelCase for others. With vuex-oidc you can use camelCase for all of the options. Or if you want you can use snake_case for the ones that are snake_cased in oidc-client.
+A note on the settings: oidc-client uses snake_case for some options and camelCase for others. With vuex-oidc you can use camelCase for all of the options. Or if you want you can use snake_case for the ones that are snake_cased in oidc-client (e.g. redirect_uri).
 
 ## 2) Setup vuex
 
