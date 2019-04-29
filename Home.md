@@ -109,7 +109,7 @@ import OidcCallback from '@/components/OidcCallback'
 const routes = [
   ...yourApplicationsRoutes,
   {
-    path: '/oidc-callback', // Needs to match redirect_uri in you oidcSettings
+    path: '/oidc-callback', // Needs to match redirectUri (redirect_uri if you use snake case) in you oidcSettings
     name: 'oidcCallback',
     component: OidcCallback,
     meta: {
@@ -289,7 +289,7 @@ const routes = [
 
 ```
 
-Routes with meta.isPublic will not require authentication. If you have setup a silent_redirect_uri a silent signIn will be made on public routes.
+Routes with meta.isPublic will not require authentication. If you have setup a silentRedirectUri (silent_redirect_uri if you use snake case) a silent signIn will be made on public routes.
 
 
 ## 9) Optional: setup silent renew callback
@@ -303,7 +303,7 @@ export const oidcSettings = {
 
 ```
 
-You have to make sure that you have an endpoint that matches the silent_redirect_uri setting. It should run the following code:
+You have to make sure that you have an endpoint that matches the silentRedirectUri setting. It should run the following code:
 
 ```js
 import { vuexOidcProcessSilentSignInCallback } from 'vuex-oidc'
