@@ -9,6 +9,8 @@ npm install oidc-client --save && npm install vuex-oidc --save
 ```
 For reference, there is an example of a working implementation in https://github.com/perarnborg/vuex-oidc-example
 
+There is also an example of how to implement vuex-oidc with Nuxt in https://github.com/perarnborg/vuex-oidc-example-nuxt. The specifics of how to implement vuex-oidc in Nuxt are not detailed in the wiki yet, but they will be shortly.
+
 
 ## 1) Create your oidc settings
 
