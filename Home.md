@@ -7,9 +7,9 @@ To install the package run:
 npm install oidc-client --save && npm install vuex-oidc --save
 
 ```
-For reference, there is an example of a working implementation in https://github.com/perarnborg/vuex-oidc-example
+For reference, there is [an example](https://github.com/perarnborg/vuex-oidc-example) of a working implementation.
 
-There is also an example of how to implement vuex-oidc with Nuxt in https://github.com/perarnborg/vuex-oidc-example-nuxt. The specifics of how to implement vuex-oidc in Nuxt are not detailed in the wiki yet, but they will be shortly.
+There is also [an example](https://github.com/perarnborg/vuex-oidc-example-nuxt) of how to implement vuex-oidc with Nuxt. The specifics of how to implement vuex-oidc in Nuxt are not detailed in the wiki yet, but they will be shortly.
 
 
 ## 1) Create your oidc settings
@@ -27,7 +27,7 @@ export const oidcSettings = {
 
 ```
 
-Check out documentation for oidc-client to see all options: https://github.com/IdentityModel/oidc-client-js/wiki
+Check out [documentation for oidc-client](https://github.com/IdentityModel/oidc-client-js/wiki) to see all options
 
 A note on the settings: oidc-client uses snake_case for some options and camelCase for others. With vuex-oidc you can use camelCase for all of the options. Or if you want you can use snake_case for the ones that are snake_cased in oidc-client (e.g. redirect_uri).
 
@@ -318,7 +318,7 @@ vuexOidcProcessSilentSignInCallback(oidcSettings)
 
 ## 10) Optional: setup oidc-client event listeners
 
-oidc-client has an events api (https://github.com/IdentityModel/oidc-client-js/wiki#events) that you can choose to implement by passing a third argument into vuexOidcCreateStoreModule
+oidc-client has an [events api](https://github.com/IdentityModel/oidc-client-js/wiki#events) that you can choose to implement by passing a third argument into vuexOidcCreateStoreModule
 
 ```js
 // https://github.com/perarnborg/vuex-oidc-example/blob/master/src/store.js
