@@ -59,7 +59,7 @@ export default new Vuex.Store({
 })
 
 ```
-If you want to have some of your routes public, you can specify those as publicRoutePaths in the storeSetting argument. If you use vue-router you can in stead specify isPublic: true on the routes' meta properties (see step #3).
+If you want to have some of your routes public, you can specify those as publicRoutePaths in the storeSetting argument. If you use vue-router you can in stead specify isPublic: true on the routes' meta properties (see step #8).
 
 ```js
 export default new Vuex.Store({
@@ -309,7 +309,7 @@ const routes = [
 
 ```
 
-Routes with meta.isPublic will not require authentication. If you have setup a silentRedirectUri (silent_redirect_uri if you use snake case) a silent signIn will be made on public routes.
+Routes with meta.isPublic will not require authentication (you may also specify what routes are public when you create your store module, see step #2). If you have setup a silentRedirectUri (silent_redirect_uri if you use snake case) a silent signIn will be made on public routes.
 
 
 ## 9) Optional: setup silent renew callback
