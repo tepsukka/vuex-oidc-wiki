@@ -9,7 +9,7 @@ npm install oidc-client --save && npm install vuex-oidc --save
 ```
 For reference, there is [an example](https://github.com/perarnborg/vuex-oidc-example) of a working implementation.
 
-There is also [an example](https://github.com/perarnborg/vuex-oidc-example-nuxt) of how to implement vuex-oidc with Nuxt. The specifics of how to implement vuex-oidc in Nuxt are not detailed in the wiki yet, but they will be shortly.
+There is also [an example](https://github.com/perarnborg/vuex-oidc-example-nuxt) of how to implement vuex-oidc with Nuxt SPA mode. Nuxt Universal mode is currently not supported.
 
 
 ## 1) Create your oidc settings
@@ -59,6 +59,16 @@ export default new Vuex.Store({
 })
 
 ```
+If you want to have some of your routes public, you can specify those as publicRoutePaths in the storeSetting argument. If you use vue-router you can in stead specify isPublic: true on the routes' meta properties (see step #3).
+
+```js
+export default new Vuex.Store({
+  modules: {
+    oidcStore: vuexOidcCreateStoreModule(oidcSettings, { namespaced: true, publicRoutePaths: ['/', '/about-us'] })
+  }
+})
+
+```
 
 ## 3) Setup route for Open id callback
 
@@ -101,7 +111,7 @@ export default {
 
 ```
 
-Setup the route with your callback component. Note the meta properties isOidcCallback and isPublic which are required for this route.
+Setup the route with your callback component. If you use nuxt-router you do not need to do this.
 
 ```js
 // https://github.com/perarnborg/vuex-oidc-example/blob/master/src/router.js
@@ -113,19 +123,15 @@ const routes = [
   {
     path: '/oidc-callback', // Needs to match redirectUri (redirect_uri if you use snake case) in you oidcSettings
     name: 'oidcCallback',
-    component: OidcCallback,
-    meta: {
-      isOidcCallback: true,
-      isPublic: true
-    }
+    component: OidcCallback
   }
 ]
 
 ``` 
 
-## 4) Setup vue-router
+## 4a) Setup vue-router
 
-Create the oidc router middleware with factory funtion vuexOidcCreateRouterMiddleware that takes your vuex store as argument.
+Create the oidc router middleware with factory function vuexOidcCreateRouterMiddleware that takes your vuex store as argument.
 
 ```js
 // https://github.com/perarnborg/vuex-oidc-example/blob/master/src/router.js
@@ -147,6 +153,18 @@ vuexOidcCreateRouterMiddleware takes an optional second argument called vuexName
 
 ```
 router.beforeEach(vuexOidcCreateRouterMiddleware(store, 'oidcStore'))
+```
+
+## 4b) Setup nuxt-router
+
+If you use Nuxt and not vue-router, you create the oidc router middleware with factory function vuexOidcCreateNuxtRouterMiddleware that takes your vuex store namespace as argument. 
+
+```js
+// https://github.com/perarnborg/vuex-oidc-example-nuxt/blob/master/middleware/vuex-oidc-router.js
+
+import { vuexOidcCreateNuxtRouterMiddleware } from 'vuex-oidc'
+
+export default vuexOidcCreateNuxtRouterMiddleware('oidc')
 ```
 
 ## 5) Optional: Control rendering in app layout or common components
