@@ -69,6 +69,16 @@ export default new Vuex.Store({
 })
 
 ```
+If you use vue-router with a router base other than the default (`/`), you will want to pass your route as routeBase in the storeSetting argument.
+
+```
+js
+export default new Vuex.Store({
+  modules: {
+    oidcStore: vuexOidcCreateStoreModule(oidcSettings, { namespaced: true, routeBase: '/app/' })
+  }
+})
+```
 
 ## 3) Setup route for Open id callback
 
