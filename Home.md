@@ -321,6 +321,11 @@ const routes = [
 
 Routes with meta.isPublic will not require authentication (you may also specify what routes are public when you create your store module, see step #2). If you have setup a silentRedirectUri (silent_redirect_uri if you use snake case) a silent signIn will be made on public routes.
 
+If there are other parameters that you want to consider when deciding if a route is public you can also provide a function that takes the route as an argument when you create your store module:
+
+```
+vuexOidc.vuexOidcCreateStoreModule(oidcConfig, {isPublicRoute: (route) => route.name && route.name.startsWith('public') })
+```
 
 ## 9) Optional: setup silent renew callback
 
