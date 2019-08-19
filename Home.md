@@ -1,10 +1,10 @@
 # How to implement vuex-oidc
 
-The library is available as an [npm package](https://www.npmjs.com/package/vuex-oidc). oidc-client is a dependency.
-To install the package run:
+The library is available as an [npm package](https://www.npmjs.com/package/vuex-oidc). oidc-client is a peer dependency.
+To install the package (and it's peer dependency) run:
 
 ```bash
-npm install oidc-client --save && npm install vuex-oidc --save
+npm install oidc-client vuex-oidc --save
 
 ```
 For reference, there is [an example](https://github.com/perarnborg/vuex-oidc-example) of a working implementation.
