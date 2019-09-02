@@ -165,6 +165,8 @@ vuexOidcCreateRouterMiddleware takes an optional second argument called vuexName
 router.beforeEach(vuexOidcCreateRouterMiddleware(store, 'oidcStore'))
 ```
 
+
+
 ## 4b) Setup nuxt-router
 
 If you use Nuxt and not vue-router, you create the oidc router middleware with factory function vuexOidcCreateNuxtRouterMiddleware that takes your vuex store namespace as argument. 
@@ -176,6 +178,8 @@ import { vuexOidcCreateNuxtRouterMiddleware } from 'vuex-oidc'
 
 export default vuexOidcCreateNuxtRouterMiddleware('oidc')
 ```
+
+NOTE: If you use vue-router with routerMode: 'hash' you need to specify this when you create your store module. You also need to handle the oidc callback outside of the Vue app. For reference, there is [a branch](https://github.com/perarnborg/vuex-oidc-example/tree/example/hash-mode) of the example project that has vue-router with hash mode, [the diff page](https://github.com/perarnborg/vuex-oidc-example/compare/example/hash-mode) shows exactly the changes that can be made to support hash mode.
 
 ## 5) Optional: Control rendering in app layout or common components
 
@@ -451,7 +455,7 @@ export default {
   methods: {
     ...mapActions([
       'authenticateOidc', // Authenticates with redirect to sign in if not signed in
-      'oidcSignInCallback', // Handles callback from authentication redirect
+      'oidcSignInCallback', // Handles callback from authentication redirect. Has an optional url parameter
       'authenticateOidcSilent', // Authenticates if signed in. No redirect is made if not signed in
       'getOidcUser', // Update user in store
       'signOutOidc', // Signs out user
