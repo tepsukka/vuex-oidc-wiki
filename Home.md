@@ -446,7 +446,8 @@ export default {
       'oidcAccessTokenExp',
       'oidcIdToken',
       'oidcIdTokenExp',
-      'oidcAuthenticationIsChecked'
+      'oidcAuthenticationIsChecked',
+      'oidcError'
     ]),
     hasAccess: function() {
       return this.oidcIsAuthenticated || this.$route.meta.isPublic
