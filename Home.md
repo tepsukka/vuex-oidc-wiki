@@ -179,7 +179,7 @@ import { vuexOidcCreateNuxtRouterMiddleware } from 'vuex-oidc'
 export default vuexOidcCreateNuxtRouterMiddleware('oidc')
 ```
 
-NOTE: If you use vue-router with routerMode: 'hash' you need to specify this when you create your store module. You also need to handle the oidc callback outside of the Vue app. For reference, there is [a branch](https://github.com/perarnborg/vuex-oidc-example/tree/example/hash-mode) of the example project that has vue-router with hash mode, [the diff page](https://github.com/perarnborg/vuex-oidc-example/compare/example/hash-mode) shows exactly the changes that can be made to support hash mode.
+NOTE: If you use vue-router with routerMode: 'hash' you need to handle the oidc callback outside of the Vue app. For reference, there is [a branch](https://github.com/perarnborg/vuex-oidc-example/tree/example/hash-mode) of the example project that has vue-router with hash mode, [the diff page](https://github.com/perarnborg/vuex-oidc-example/compare/example/hash-mode) shows exactly the changes that can be made to support hash mode.
 
 ## 5) Optional: Control rendering in app layout or common components
 
