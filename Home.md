@@ -302,6 +302,7 @@ export default {
 </script>
 
 ```
+If you for some reason want to sign out the user only from the current application, you can use the action `removeUser` in stead of `signOutOidc`.
 
 
 ## 8) Optional: set specific routes as public
@@ -459,7 +460,8 @@ export default {
       'oidcSignInCallback', // Handles callback from authentication redirect. Has an optional url parameter
       'authenticateOidcSilent', // Authenticates if signed in. No redirect is made if not signed in
       'getOidcUser', // Update user in store
-      'signOutOidc', // Signs out user
+      'signOutOidc', // Signs out user in open id provider
+      'removeUser' // Signs out user in vuex and browser storage, but not in open id provider
     ])
   }
 }
