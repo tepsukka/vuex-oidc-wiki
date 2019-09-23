@@ -383,13 +383,15 @@ export default new Vuex.Store({
         accessTokenExpiring: () => console.log('Access token will expire'),
         accessTokenExpired: () => console.log('Access token did expire'),
         silentRenewError: () => console.log('OIDC user is unloaded'),
-        userSignedOut: () => console.log('OIDC user is signed out')
+        userSignedOut: () => console.log('OIDC user is signed out'),
+        oidcError: (payload) => console.log(`An error occured at ${payload.context}:`, payload.error)
       }
     )
   }
 })
 
 ```
+The event oidcError is not from `oidc-client`, but is implemented in `vuex-oidc`.
 
 If you want to listen to the events from inside your application the events can also be dispatched in the browser as custom events by vuex-oidc (prefixed with `vuexoidc:`). If you want this you pass `dispatchEventsOnWindow: true` as a storeSetting (second argument to the vuexOidcCreateStoreModule function).
 
