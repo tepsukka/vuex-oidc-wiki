@@ -461,7 +461,7 @@ export default {
       'authenticateOidc', // Authenticates with redirect to sign in if not signed in
       'oidcSignInCallback', // Handles callback from authentication redirect. Has an optional url parameter
       'authenticateOidcSilent', // Authenticates if signed in. No redirect is made if not signed in
-      'getOidcUser', // Update user in store
+      'getOidcUser', // Get user from oidc-client storage and update it in vuex store. Returns a promise
       'signOutOidc', // Signs out user in open id provider
       'removeUser' // Signs out user in vuex and browser storage, but not in open id provider
     ])
