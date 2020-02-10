@@ -27,7 +27,7 @@ export const oidcSettings = {
 
 ```
 
-Check out [documentation for oidc-client](https://github.com/IdentityModel/oidc-client-js/wiki) to see all options
+Check out [documentation for oidc-client](https://github.com/IdentityModel/oidc-client-js/wiki) to see all options. In addition to the options in oidc-client there is also an option to turn off automatical signin on public routes. See more about this in the section about silent signin.
 
 A note on the settings: oidc-client uses snake_case for some options and camelCase for others. With vuex-oidc you can use camelCase for all of the options. Or if you want you can use snake_case for the ones that are snake_cased in oidc-client (e.g. redirect_uri).
 
@@ -338,7 +338,8 @@ vuexOidc.vuexOidcCreateStoreModule(oidcConfig, {isPublicRoute: (route) => route.
 export const oidcSettings = {
   ...youOidcOtherSettings,
   silentRedirectUri: 'http://localhost:1337/oidc-silent-renew.html',
-  automaticSilentRenew: true // If true oidc-client will try to renew your token when it is about to expire
+  automaticSilentRenew: true, // If true oidc-client will try to renew your token when it is about to expire
+  automaticSilentSignin: true // If true vuex-oidc will try to silently signin unauthenticated users on public routes. Defaults to true
 }
 
 ```
