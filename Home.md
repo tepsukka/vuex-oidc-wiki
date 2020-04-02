@@ -349,9 +349,7 @@ You have to make sure that you have an endpoint that matches the silentRedirectU
 ```js
 import { vuexOidcProcessSilentSignInCallback } from 'vuex-oidc'
 
-import { oidcSettings } from '@/config'
-
-vuexOidcProcessSilentSignInCallback(oidcSettings)
+vuexOidcProcessSilentSignInCallback()
 
 ```
 
