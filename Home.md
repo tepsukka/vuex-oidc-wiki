@@ -458,6 +458,8 @@ export default {
       'oidcAccessTokenExp',
       'oidcIdToken',
       'oidcIdTokenExp',
+      'oidcRefreshToken',
+      'oidcRefreshTokenExp',
       'oidcAuthenticationIsChecked',
       'oidcError'
     ]),
