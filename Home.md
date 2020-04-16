@@ -79,6 +79,16 @@ export default new Vuex.Store({
   }
 })
 ```
+By default this package binds access to if the user has a valid id_token. You can change this with the isAuthenticatedBy property on the storeSetting argument so access is bound to a valid access_token in stead.
+
+```
+js
+export default new Vuex.Store({
+  modules: {
+    oidcStore: vuexOidcCreateStoreModule(oidcSettings, { namespaced: true, isAuthenticatedBy: 'access_token' })
+  }
+})
+```
 
 ## 3) Setup route for Open id callback
 
