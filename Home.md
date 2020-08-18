@@ -314,6 +314,8 @@ export default {
 ```
 If you for some reason want to sign out the user only from the current application, you can use the action `removeOidcUser` in stead of `signOutOidc`.
 
+A third option is to use the action `signOutOidcSilent`, which signs the user out at the provider in a hidden iframe (in stead of redirecting the browser window to the identity provider's server).
+
 
 ## 8) Optional: set specific routes as public
 
@@ -474,6 +476,7 @@ export default {
       'authenticateOidcSilent', // Authenticates if signed in. No redirect is made if not signed in
       'getOidcUser', // Get user from oidc-client storage and update it in vuex store. Returns a promise
       'signOutOidc', // Signs out user in open id provider
+      'signOutOidcSilent', // Signs out user in open id provider using a hidden iframe
       'removeOidcUser' // Signs out user in vuex and browser storage, but not in open id provider
     ])
   }
