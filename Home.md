@@ -5,12 +5,11 @@ To install the package (and it's peer dependency) run:
 
 ```bash
 npm install oidc-client vuex-oidc --save
-
 ```
+
 For reference, there is [an example](https://github.com/perarnborg/vuex-oidc-example) of a working implementation.
 
 There is also [an example](https://github.com/perarnborg/vuex-oidc-example-nuxt) of how to implement vuex-oidc with Nuxt SPA mode. Nuxt Universal mode is currently not supported.
-
 
 ## 1) Create your oidc settings
 
@@ -47,8 +46,8 @@ export default new Vuex.Store({
     oidcStore: vuexOidcCreateStoreModule(oidcSettings)
   }
 })
-
 ```
+
 If you want a namespaced module you can pass storeSetting as a second argument:
 
 ```js
@@ -57,8 +56,8 @@ export default new Vuex.Store({
     oidcStore: vuexOidcCreateStoreModule(oidcSettings, { namespaced: true })
   }
 })
-
 ```
+
 If you want to have some of your routes public, you can specify those as publicRoutePaths in the storeSetting argument. If you use vue-router you can in stead specify isPublic: true on the routes' meta properties (see step #8).
 
 ```js
@@ -67,22 +66,21 @@ export default new Vuex.Store({
     oidcStore: vuexOidcCreateStoreModule(oidcSettings, { namespaced: true, publicRoutePaths: ['/', '/about-us'] })
   }
 })
-
 ```
+
 If you use vue-router with a router base other than the default (`/`), you will want to pass your route as routeBase in the storeSetting argument.
 
-```
-js
+```js
 export default new Vuex.Store({
   modules: {
     oidcStore: vuexOidcCreateStoreModule(oidcSettings, { namespaced: true, routeBase: '/app/' })
   }
 })
 ```
+
 By default this package binds access to if the user has a valid id_token. You can change this with the isAuthenticatedBy property on the storeSetting argument so access is bound to a valid access_token in stead.
 
-```
-js
+```js
 export default new Vuex.Store({
   modules: {
     oidcStore: vuexOidcCreateStoreModule(oidcSettings, { namespaced: true, isAuthenticatedBy: 'access_token' })
@@ -96,10 +94,8 @@ Create a callback component. The component will be rendered during the time that
 
 If you have created your vuex store module as a namespaced module you will have to map the action from the correct namespace.
 
-```js
-// https://github.com/perarnborg/vuex-oidc-example/blob/master/src/views/OidcCallback.vue
-
-<script>
+```vue
+<!-- https://github.com/perarnborg/vuex-oidc-example/blob/master/src/views/OidcCallback.vue -->
 
 <template>
   <div>
@@ -128,7 +124,6 @@ export default {
   }
 }
 </script>
-
 ```
 
 Setup the route with your callback component. If you use nuxt-router you do not need to do this.
@@ -146,8 +141,7 @@ const routes = [
     component: OidcCallback
   }
 ]
-
-``` 
+```
 
 ## 4a) Setup vue-router
 
@@ -166,20 +160,17 @@ const router = new Router({
   routes: routes
 })
 router.beforeEach(vuexOidcCreateRouterMiddleware(store))
-
 ```
 
 vuexOidcCreateRouterMiddleware takes an optional second argument called vuexNamespace. I you have created you oidc vuex module as a namespaced module you should pass the namespace string as this second argument:
 
-```
+```js
 router.beforeEach(vuexOidcCreateRouterMiddleware(store, 'oidcStore'))
 ```
 
-
-
 ## 4b) Setup nuxt-router
 
-If you use Nuxt and not vue-router, you create the oidc router middleware with factory function vuexOidcCreateNuxtRouterMiddleware that takes your vuex store namespace as argument. 
+If you use Nuxt and not vue-router, you create the oidc router middleware with factory function vuexOidcCreateNuxtRouterMiddleware that takes your vuex store namespace as argument.
 
 ```js
 // https://github.com/perarnborg/vuex-oidc-example-nuxt/blob/master/middleware/vuex-oidc-router.js
@@ -193,11 +184,11 @@ NOTE: If you use vue-router with routerMode: 'hash' you need to handle the oidc 
 
 ## 5) Optional: Control rendering in app layout or common components
 
-The router middleware will ensure that routes that require authentication are not rendered. If you want to control rendering outside of the router-view you can use the vuex getter oidcIsAuthenticated to check authentication. 
+The router middleware will ensure that routes that require authentication are not rendered. If you want to control rendering outside of the router-view you can use the vuex getter oidcIsAuthenticated to check authentication.
 
 This can be done in any way you want. Here is an example of how to condition rendering against authentication in a component.
 
-```js
+```vue
 <template>
   <div v-if="oidcIsAuthenticated">
     Protected content
@@ -216,13 +207,11 @@ export default {
   }
 }
 </script>
-
 ```
-
 
 If you want to know not only if the user is authenticated, but if they have access to the current route you can do so by checking oidcIsAuthenticated together with meta.isPublic of current route.
 
-```js
+```vue
 <template>
   <div v-if="hasAccess">
     You have access to this route
@@ -245,9 +234,7 @@ export default {
   }
 }
 </script>
-
 ```
-
 
 ## 6) Optional: use access token in AJAX requests
 
@@ -280,12 +267,11 @@ function makeRequest(method, url, access_token) {
 }
 ```
 
-
 ## 7) Optional: display signed in user info and show sign out button
 
 Use vuex getter oidcUser to show user info. Use vuex action signOutOidc to sign out user.
 
-```js
+```vue
 <template>
   <div v-if="oidcUser">
     Signed in as {{ oidcUser.email }}
@@ -310,12 +296,11 @@ export default {
   }
 }
 </script>
-
 ```
+
 If you for some reason want to sign out the user only from the current application, you can use the action `removeOidcUser` in stead of `signOutOidc`.
 
 A third option is to use the action `signOutOidcSilent`, which signs the user out at the provider in a hidden iframe (in stead of redirecting the browser window to the identity provider's server).
-
 
 ## 8) Optional: set specific routes as public
 
@@ -333,15 +318,14 @@ const routes = [
     }
   }
 ]
-
 ```
 
 Routes with meta.isPublic will not require authentication (you may also specify what routes are public when you create your store module, see step #2). If you have setup a silentRedirectUri (silent_redirect_uri if you use snake case) a silent signIn will be made on public routes.
 
 If there are other parameters that you want to consider when deciding if a route is public you can also provide a function that takes the route as an argument when you create your store module:
 
-```
-vuexOidc.vuexOidcCreateStoreModule(oidcConfig, {isPublicRoute: (route) => route.name && route.name.startsWith('public') })
+```js
+vuexOidc.vuexOidcCreateStoreModule(oidcConfig, { isPublicRoute: (route) => route.name && route.name.startsWith('public') })
 ```
 
 ## 9) Optional: setup silent renew callback
@@ -353,7 +337,6 @@ export const oidcSettings = {
   automaticSilentRenew: true, // If true oidc-client will try to renew your token when it is about to expire
   automaticSilentSignin: true // If true vuex-oidc will try to silently signin unauthenticated users on public routes. Defaults to true
 }
-
 ```
 
 You have to make sure that you have an endpoint that matches the silentRedirectUri setting. It should run the following code:
@@ -362,7 +345,6 @@ You have to make sure that you have an endpoint that matches the silentRedirectU
 import { vuexOidcProcessSilentSignInCallback } from 'vuex-oidc'
 
 vuexOidcProcessSilentSignInCallback()
-
 ```
 
 ## 10) Optional: setup oidc-client event listeners
@@ -384,7 +366,7 @@ export default new Vuex.Store({
     oidcStore: vuexOidcCreateStoreModule(
       oidcSettings,
       // Optional OIDC store settings
-      {        
+      {
         dispatchEventsOnWindow: true
       },
       // Optional OIDC event listeners
@@ -401,20 +383,20 @@ export default new Vuex.Store({
     )
   }
 })
-
 ```
+
 The events oidcError and automaticSilentRenewError are not from `oidc-client`, but are implemented in `vuex-oidc`.
 
 If you want to listen to the events from inside your application the events can also be dispatched in the browser as custom events by vuex-oidc (prefixed with `vuexoidc:`). If you want this you pass `dispatchEventsOnWindow: true` as a storeSetting (second argument to the vuexOidcCreateStoreModule function).
 
-```
+```js
 // https://github.com/perarnborg/vuex-oidc-example/tree/master/src/store.js
 // How to make vuex-oidc dispatch events on window
 
 export default new Vuex.Store({
   modules: {
     oidcStore: vuexOidcCreateStoreModule(
-      oidcSettings,     
+      oidcSettings,
       // Optional OIDC store settings
       {
         dispatchEventsOnWindow: true
@@ -441,14 +423,14 @@ export default {
     window.removeEventListener('vuexoidc:userLoaded', this.userLoaded)
   }
 }
-
 ```
 
-# API
+## API
 
 The router middleware handles authentication of routes automatically, but there are also actions you can use directly. If you want you can skip the router middleware to customize the authentication and access control behaviour of your app.
 
-```js
+```vue
+<script>
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
